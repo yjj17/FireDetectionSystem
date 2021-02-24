@@ -1,10 +1,12 @@
 데이터 전처리를 위한 소스코드 : data preprocessing1.ipynb	
 fire classification을 위한 소스코드 : fire_classification.ipynb
 fire localization을 위한 소스코드 : fire_Localization.ipynb
-	
+image crawling을 위한 소스코드 : image_crawling.ipynb
 
-위 소스코드를 실행하기 위해서는 data 폴더에는 다음과 같은 구조로 데이터가 들어있어야 한다.
+실행조건
+1. crawling을 위해서는 크롬드라이버를 현재 폴더에 다운로드해야 한다.(자세한 사항은 image_crawling.ipynb에서 확인가능
 
+2. 소스코드를 실행하기 위해서는 data 폴더에는 다음과 같은 구조로 데이터가 들어있어야 한다.
 <data>
 	
 	<annotated>
@@ -37,7 +39,11 @@ fire localization을 위한 소스코드 : fire_Localization.ipynb
 	<video>
 		<CCTV> CCTV 영상들 </CCTV>
 	</video>
-
+	<crawled_images>
+		<0></0>
+		<1></1>
+		<2></2>
+	</crawled_images>
 </data>
 
 kaggle등에서 이미지를 다운받을 수 있다.
