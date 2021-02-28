@@ -14,7 +14,7 @@
 	1) 크롬드라이버를 현재 폴더에 다운로드 한다.(자세한 사항은 image_crawling.ipynb에서 확인가능
 	2) image_crawling.ipynb를 실행한다.
 	3) ImageClassifingHelper.exe를 실행하여 잘못 crawling된 파일을 삭제한다.
-	4) ImageAnnotationHelper.exe를 실행하여 불의 위치 정보를 xml파일로 저장한다.
+	4) ImageAnnotationHelper.exe를 실행하고 불의 위치를 드래그하여 이미지의 정보를 xml파일로 저장한다.
 	5) crawled_image_data_augmentation.exe를 실행하여 데이터 증강
 	6) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
 
