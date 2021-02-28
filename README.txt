@@ -1,7 +1,8 @@
 # 프로그램
 * 데이터 전처리를 위한 소스코드 : data preprocessing1.ipynb	
 * fire classification을 위한 소스코드 : fire_classification.ipynb
-* fire localization을 위한 소스코드 : fire_Localization.ipynb
+* fire localization 학습을 위한 소스코드 : fire_Localization.ipynb
+* video에서 fire localization을 수행하는 소스코드: Video_Fire_Localization.ipynb
 * image crawling을 위한 소스코드 : image_crawling.ipynb
 * crawling한 이미지를 분류하기위한 프로그램: ImageClassifingHelper.exe
 * crawling한 이미지 annotation을 위한 프로그램:ImageAnnotationHelper.exe
@@ -22,6 +23,7 @@
 
 3. Localization 학습
 	1) fire_Localization.ipynb 실행
+	2) Video_Fire_Localization.ipynb 실행
 
 kaggle등에서 이미지를 다운받을 수 있다.
 복제 및 재배포 등의 라이센스 문제로 github에는 이미지를 commit하지 않는다.
