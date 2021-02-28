@@ -6,6 +6,7 @@
 * crawling한 이미지를 분류하기위한 프로그램: ImageClassifingHelper.exe
 * crawling한 이미지 annotation을 위한 프로그램:ImageAnnotationHelper.exe
 * crawling한 이미지 데이터 증강 프로그램: crawled_image_data_augmentation.exe
+* annotation한 데이터 증강 프로그램: AnnotatedImageDataAugmentation.exe
 
 # 실행방법
 1. 이미지 crawling & augmentation
@@ -14,6 +15,7 @@
 	3) ImageClassifingHelper.exe를 실행하여 잘못 crawling된 파일을 삭제한다.
 	4) ImageAnnotationHelper.exe를 실행하여 불의 위치 정보를 xml파일로 저장한다.
 	5) crawled_image_data_augmentation.exe를 실행하여 데이터 증강
+	6) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
 
 2. Classification 학습
 	1) fire_classification.ipynb 실행
