@@ -35,6 +35,8 @@
 		<0></0>
 		<1></1>
 		<2></2>
+		<test></test>
+		<annotation></annotation>
 	</crawled_images>
 
 </data>

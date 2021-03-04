@@ -4,6 +4,7 @@
 * fire localization 학습을 위한 소스코드 : fire_Localization.ipynb
 * video에서 fire localization을 수행하는 소스코드: Video_Fire_Localization.ipynb
 * image crawling을 위한 소스코드 : image_crawling.ipynb
+* crawling한 이미지중 중복되는 이미지 제거 프로그램: DuplicatedImagesRemover.exe
 * crawling한 이미지를 분류하기위한 프로그램: ImageClassifingHelper.exe
 * crawling한 이미지 annotation을 위한 프로그램:ImageAnnotationHelper.exe
 * crawling한 이미지 데이터 증강 프로그램: crawled_image_data_augmentation.exe
@@ -13,10 +14,11 @@
 1. 이미지 crawling & augmentation
 	1) 크롬드라이버를 현재 폴더에 다운로드 한다.(자세한 사항은 image_crawling.ipynb에서 확인가능
 	2) image_crawling.ipynb를 실행한다.
-	3) ImageClassifingHelper.exe를 실행하여 잘못 crawling된 파일을 삭제한다.
-	4) ImageAnnotationHelper.exe를 실행하고 불의 위치를 드래그하여 이미지의 정보를 xml파일로 저장한다.
-	5) crawled_image_data_augmentation.exe를 실행하여 데이터 증강
-	6) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
+	3) DuplicatedImagesRemover.exe을 실행하여 중복된 이미지를 삭제한다.
+	4) ImageClassifingHelper.exe를 실행하여 잘못 crawling된 이미지를 삭제한다.
+	5) ImageAnnotationHelper.exe를 실행하고 불의 위치를 드래그하여 이미지의 정보를 xml파일로 저장한다
+	6) crawled_image_data_augmentation.exe를 실행하여 데이터 증강
+	7) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
 
 2. Classification 학습
 	1) fire_classification.ipynb 실행

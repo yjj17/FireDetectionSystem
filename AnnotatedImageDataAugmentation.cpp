@@ -24,7 +24,7 @@ void getFileList(char* imgPath, vector<char*>& imgList) {
 
 }
 void writeXML(Mat& image,char * imgName,Point pt1, Point pt2) {
-	char folder[256] = "./data/crawled_images/annotated/";
+	char folder[256] = "./data/crawled_images/annotated/train/";
 	char img[256];
 	char dst_img[256];
 	char xml[256] = ".xml";
@@ -113,7 +113,7 @@ int readTag(const char *dst_xml, const char * tag) {
 	return -1;
 }
 void readXML(char * src_img, Mat& image, Point & pt1, Point & pt2) {
-	char folder[256] = "./data/crawled_images/annotated/";
+	char folder[256] = "./data/crawled_images/annotated/train/";
 	char img[256];
 	char dst_img[256];
 	char xml[256] = ".xml";
@@ -175,7 +175,7 @@ void annotatedImageAugmentation(vector<char*>& imgList, int flag) {
 int main(void)
 {
 	vector<char*> imgList;
-	char imgDir[256] = "./data/crawled_images/annotated/*.jpg";
+	char imgDir[256] = "./data/crawled_images/annotated/train/*.jpg";
 	
 	getFileList(imgDir, imgList);
 	annotatedImageAugmentation(imgList, 1);
