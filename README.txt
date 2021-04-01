@@ -1,4 +1,4 @@
-# 프로그램
+# 학습 프로그램
 python
      * fire classification을 위한 소스코드 : fire_classification_using_crawled_data.ipynb
      * fire localization 학습을 위한 소스코드 : fire_Localization_using_crawled_data.ipynb
@@ -14,7 +14,7 @@ C++
 
 
 
-# 실행방법
+# 학습 방법
 1. 이미지 crawling & augmentation
 	1) 크롬드라이버를 현재 폴더에 다운로드 한다.(자세한 사항은 image_crawling.ipynb에서 확인가능
 	2) image_crawling.ipynb를 실행한다.
@@ -38,3 +38,10 @@ C++
 
 kaggle등에서 이미지를 다운받을 수 있다.
 복제 및 재배포 등의 라이센스 문제로 github에는 이미지를 commit하지 않는다.
+
+# CCTV 프로그램
+Raspberry Pi 
+	* 동영상 파일에서 데이터를 읽어서 우분투에 있는 CCTV-server로 송신: CCTV-Client.py
+
+Ubuntu
+	* CCTV-Client에서 데이터를 수신받아 화면에 출력: CCTV_Server.py
