@@ -25,12 +25,15 @@ C++
 	7) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
 
 2. Classification 학습
+	선행) 1. 이미지 crawling & augmentation
 	1) fire_classification_using_crawled_data.ipynb 실행
 
 3. Localization 학습
+	선행) 1. 이미지 crawling & augmentation
 	1) fire_Localization_using_crawled_data.ipynb 실행
 
 4. 비디오에 Classification 및 Localization 적용
+	선행) 비디오파일을 "./data/video/CCTV/"에 저장한다.
 	1) AI_Module.ipynb 실행
 
 kaggle등에서 이미지를 다운받을 수 있다.
