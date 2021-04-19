@@ -8,12 +8,9 @@ enclosure_queue = Queue()
 
 
 def webcam_transmit(client_socket, queue):
-    print(client_socket)
     while True:
-        print('.',end='')
         try:
             data = client_socket.recv(1024)
-            print(data)
             if not data:
                 print('Disconnected')
                 break
@@ -32,13 +29,17 @@ def webcam_transmit(client_socket, queue):
 
 def webcam_input(queue):
     capture = cv2.VideoCapture('./fire and smoke.mp4')
-
+    speed=6
+    i = 0
     while True:
+        
         ret, frame = capture.read()
         
         if ret == False:
             continue
-
+        i+=1
+        if (i % speed) != 0 :
+            continue
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
         result, imgencode = cv2.imencode('.jpg', frame, encode_param)
 
@@ -50,7 +51,7 @@ def webcam_input(queue):
         cv2.imshow('image', frame)
         key = cv2.waitKey(1)
         if key == 27:
-            break
+            return
 
 
 HOST = '192.168.219.104'
@@ -60,10 +61,5 @@ client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client_socket.connect((HOST,PORT))
 
 print('client start')
-print(client_socket)
 i = start_new_thread(webcam_input, (enclosure_queue,))
 t = start_new_thread(webcam_transmit, (client_socket, enclosure_queue,))
-
-i.join()
-t.join()
-client_socket.close()
