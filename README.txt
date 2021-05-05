@@ -17,20 +17,20 @@ C++
 # 학습 방법
 1. 이미지 crawling & augmentation
 	1) 크롬드라이버를 현재 폴더에 다운로드 한다.(자세한 사항은 image_crawling.ipynb에서 확인가능
-	2) image_crawling.ipynb를 실행한다.
+	2) image_crawling.py를 실행한다.
 	3) DuplicatedImagesRemover.exe을 실행하여 중복된 이미지를 삭제한다.
 	4) ImageClassifingHelper.exe를 실행하여 잘못 crawling된 이미지를 삭제한다.
 	5) ImageAnnotationHelper.exe를 실행하고 불의 위치를 드래그하여 이미지의 정보를 xml파일로 저장한다
-	6) crawled_image_data_augmentation.exe를 실행하여 데이터 증강
+	6) image_data_augmentation.exe를 실행하여 데이터 증강
 	7) AnnotatedImageDataAugmentation.exe를 실행하여 4번에서 Annotation한 데이터 증강
 
 2. Classification 학습
 	선행) 1. 이미지 crawling & augmentation
-	1) fire_classification_using_crawled_data.ipynb 실행
+	1) Fire_Classification.py 실행
 
 3. Localization 학습
 	선행) 1. 이미지 crawling & augmentation
-	1) fire_Localization_using_crawled_data.ipynb 실행
+	1) Fire_Localization.py 실행
 
 4. 비디오에 Classification 및 Localization 적용
 	선행) 비디오파일을 "./data/video/CCTV/"에 저장한다.
