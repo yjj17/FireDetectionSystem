@@ -1,9 +1,9 @@
 import socket 
 import numpy as np
 import cv2
-
 import tensorflow as tf
 from tensorflow import keras
+from PIL import Image
 
 
 #모델 불러오기
@@ -47,7 +47,7 @@ def recvall(sock, count):
 IMG_SIZE = 224
 
 #서버의 IP및 포트번호
-HOST = '192.168.219.104'
+HOST = '192.168.219.106'
 PORT = 9999
 #TCP 소켓 연결
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -69,10 +69,14 @@ while True:
     stringData = recvall(client, int(length))
     data = np.frombuffer(stringData, dtype='uint8')
     decimg=cv2.imdecode(data,1)
+    
 
     #이미지(opencv)를 모델에 맞는 데이터로 변환
-    decimg = cv2.resize(decimg,(IMG_SIZE, IMG_SIZE))
-    image = decimg[tf.newaxis,...]
+    image = Image.fromarray(decimg)
+    image = image.resize((IMG_SIZE, IMG_SIZE))
+    image = tf.cast(np.array(image), tf.float32) / 255.
+    image = image[tf.newaxis,...]
+    decimg = cv2.cvtColor(decimg, cv2.COLOR_BGR2RGB)
 
     #데이터 입력및 분류
     prediction = model.predict(image)
@@ -82,29 +86,31 @@ while True:
     #원본 이미지에 분류 결과 정보(화재여부, 화재 지역) 합성
     image = image[0]
     if pred_label==0:
-        image = cv2.rectangle(image,(0,0),(150,40),(255,255,255),cv2.FILLED)
-        image=cv2.putText(image,"Non-Fire", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
+        decimg = cv2.rectangle(decimg,(0,0),(150,40),(255,255,255),cv2.FILLED)
+        decimg = cv2.putText(decimg,"Non-Fire", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
     elif pred_label == 1:
-        image = cv2.rectangle(image,(0,0),(80,40),(255,255,255),cv2.FILLED)
-        image = cv2.putText(image,"Fire!!", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
+        decimg = cv2.rectangle(decimg,(0,0),(80,40),(255,255,255),cv2.FILLED)
+        decimg = cv2.putText(decimg,"Fire!!", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
         pred_x = pred_local[0]
         pred_y = pred_local[1]
         pred_w = pred_local[2]
         pred_h = pred_local[3]
-            
-        pred_xmin = int((pred_x - pred_w/2.))*IMG_SIZE
-        pred_ymin = int((pred_y - pred_h/2.))*IMG_SIZE
-        pred_xmax = int((pred_x + pred_w/2.))*IMG_SIZE
-        pred_ymax = int((pred_y + pred_h/2.))*IMG_SIZE
-            
-        image = cv2.rectangle(image,(pred_xmin,pred_ymin),(pred_xmax,pred_ymax),(0,0,255),2)
+        
+        height, width, _ = decimg.shape
+    
+        pred_xmin = int((pred_x - pred_w/2.)*width)
+        pred_ymin = int((pred_y - pred_h/2.)*height)
+        pred_xmax = int((pred_x + pred_w/2.)*width)
+        pred_ymax = int((pred_y + pred_h/2.)*height)
+        print(pred_local)
+        decimg = cv2.rectangle(decimg,(pred_xmin,pred_ymin),(pred_xmax,pred_ymax),(0,0,255),2)
 
     elif pred_label== 2:
-        image = cv2.rectangle(image,(0,0),(120,40),(255,255,255),cv2.FILLED)
-        image = cv2.putText(image,"SMOKE!", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
+        decimg = cv2.rectangle(decimg,(0,0),(120,40),(255,255,255),cv2.FILLED)
+        decimg = cv2.putText(decimg,"SMOKE!", (0, 30), cv2.FONT_ITALIC, 1, (0, 0, 255),3)
 
     #합성 이미지 출력
-    cv2.imshow('video', image)
+    cv2.imshow('video', decimg)
 
    
     key = cv2.waitKey(1)
@@ -113,3 +119,4 @@ while True:
 
 client.close()
 server.close()
+

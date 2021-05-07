@@ -4,6 +4,7 @@ import numpy
 from queue import Queue
 from _thread import *
 
+IMG_SIZE = 224
 enclosure_queue = Queue()
 
 #webcam으로부터 영상을 읽어서 queue에 넣는 쓰레드가 수행하는 함수
@@ -12,16 +13,17 @@ def webcam_input(queue):
     speed=6
     i = 0
     while True:
-        
+
         ret, frame = capture.read()
-        
+
         if ret == False:
             continue
         i+=1
         if (i % speed) != 0 :
             continue
+        frame2 = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-        result, imgencode = cv2.imencode('.jpg', frame, encode_param)
+        result, imgencode = cv2.imencode('.jpg', frame2, encode_param)
 
         #영상을 문자열 자료형으로 변환 후 저장
         data = numpy.array(imgencode)
@@ -57,7 +59,7 @@ def webcam_transmit(client_socket, queue):
     client_socket.close()
 
 #서버의 IP주소및 포트번호
-HOST = '192.168.219.104'
+HOST = '192.168.219.106'
 PORT = 9999
 #소켓 생성및 연결
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -68,3 +70,4 @@ print('client start')
 i = start_new_thread(webcam_input, (enclosure_queue,))
 #영상 전송 쓰레드 생성
 t = start_new_thread(webcam_transmit, (client_socket, enclosure_queue,))
+

@@ -5,8 +5,8 @@
 using namespace cv;
 using namespace std;
 
-#define FOLDER "./data/crawled_images/annotated/train/" //이미지(.jpg)와 이미지정보(xml) 파일이 저장된 경로
-#define IMGNAMEPATH "./data/crawled_images/annotated/train/*.jpg" //이미지 이름을 저장하기 위해 필요한 path 정보
+#define FOLDER "./data/crawled_images/annotated/" //이미지(.jpg)와 이미지정보(xml) 파일이 저장된 경로
+#define IMGNAMEPATH "./data/crawled_images/annotated/*.jpg" //이미지 이름을 저장하기 위해 필요한 path 정보
 
 //imgPath 폴더에 존재하는 모든 이미지(.jpg) 파일 이름을 imgList에 저장
 void getFileList(const char* imgPath, vector<char*>& imgList) {

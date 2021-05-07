@@ -101,7 +101,7 @@ void writeXML(Mat & image) {
 			break;
 		}
 	}
-	sprintf_s(dst_xml, "%s%s%s", folder,img, xml);
+	sprintf_s(dst_xml, "%sannotated/%s%s", folder,img, xml);
 	printf("imwrite: %s\nfprintf: %s\n",dst_img,dst_xml);
 	imwrite(dst_img, image);
 	FILE* fp;
