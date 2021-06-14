@@ -1,0 +1,8 @@
+,key,common train data len,fire train data len,smoke train data len,common validation data len,fire validation data len,smoke validation data len,EPOCHS,learning_rate_schedule,batch size,loss_func,optimizer,comment,test_accuracy,train time
+0,0,3900,1608,768,1301,537,257,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=392.25,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,초기 모델,0.79733336,
+1,1,3900,3216,3075,1301,1074,1025,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=636.9375,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,초기 모델 + 데이터 증강,0.663999975,
+2,1623129342,3900,3216,3075,1301,1074,1025,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=636.9375,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,초기모델 +데이터증강+배치정규화+모델축소,0.622666657,10071.62
+3,1623150424,3900,1608,768,1301,537,257,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=392.25,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,초기모델+배치정규화+모델축소,0.738666654,7463.13
+4,1623186867,3900,3216,3075,1301,1074,1025,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=636.9375,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,데이터증강 + mobilenetv2finetuning,0.875999987,21210.77
+5,1623163568,3900,1608,768,1301,537,257,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=392.25,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,mobilenetv2 finetuning,0.920000017,12181.3
+6,1623235846,3900,1608,768,1301,537,257,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=392.25,decay_rate=0.5,staircase=True)",32,SparseCategoricalCrossentropy,RMSprop,inception_resnet_v2,0.907999992,68382.69

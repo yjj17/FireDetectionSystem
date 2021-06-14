@@ -20,7 +20,6 @@ void removeDuplicatedImageFile(vector<char*>& imgNameList, Vec3i & bins, Vec3f &
 
 	imshow("Infomation", info);
 	moveWindow("Infomation", 0, 0);
-
 	int i = 0;
 	for (const auto& a : imgNameList) {
 
@@ -69,16 +68,21 @@ int main()
 	cout << "   기준 유사도(0~1) 입력: ";
 	cin >> sinc;
 	
-
+	printf("유사도 %f", sinc);
+	removeN = 0;
 	getFileList(nonFireDir, nonFireFileList);
 	removeDuplicatedImageFile(nonFireFileList, bins, ranges , 0, sinc);
+	printf("삭제된 일반 이미지 : %d\n", removeN);
 
-
+	removeN = 0;
 	getFileList(fireDir, fireFileList);
 	removeDuplicatedImageFile(fireFileList, bins, ranges, 1, sinc);
+	printf("삭제된 화재 이미지 : %d\n", removeN);
 
+	removeN = 0;
 	getFileList(smokeDir, smokeFileList);
 	removeDuplicatedImageFile(smokeFileList, bins, ranges, 2, sinc);
+	printf("삭제된 연기 이미지 : %d\n", removeN);
 
 	return 0;
 }

@@ -28,39 +28,48 @@ void getFileList(char* imgPath, vector<char*>& imgNameList) {
 //모든 이미지를 한 장씩 출력하면서 삭제 여부를 질의 함
 void removeImageFile(vector<char*>& imgNameList,const char * question, int flag) {//question = "is Non-Fire?"
 
-	Mat info = Mat(210, 800, CV_8UC3, Scalar(255, 255, 255));
+	Mat info = Mat(230, 800, CV_8UC3, Scalar(255, 255, 255));
 	
 	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
-	printf("조작법\n\n Delete: NO  (현재 띄워진 이미지 삭제) \nSpace: YES  (다음 이미지 보기)\nESC: 종료\n");
+	printf("조작법\n\n Delete: NO  (현재 띄워진 이미지 삭제) \nSpace: YES  (다음 이미지 보기) \n Backspace: 이전 이미지 보기\nESC: 종료\n");
 	printf("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n\n");
 
 	putText(info, question, Point(0, 50), FONT_HERSHEY_SIMPLEX, 2, Scalar(0, 0, 255));
 	putText(info, "No: Delete", Point(0, 110), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 0));
 	putText(info, "YES: Space", Point(0, 150), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 0));
-	putText(info, "QUIT: ESC", Point(0, 180), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 0));
+	putText(info, "Back: Backspace", Point(0, 180), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 0));
+	putText(info, "QUIT: ESC", Point(0, 210), FONT_HERSHEY_SIMPLEX, 1, Scalar(0, 0, 0));
 
 	imshow(question, info);
 	moveWindow(question, 0, 0);
-	for (const auto& a : imgNameList) {
+	for (int i = 0; i < imgNameList.size();i++) {		
 		char img[256] = FOLDER;
 		char buf[256];
 		sprintf_s(buf, "%d/", flag);
 		strncat_s(img, buf, 256);
-		strncat_s(img, a, 256);
+		strncat_s(img, imgNameList[i], 256);
 		Mat image = imread(img, IMREAD_COLOR);
 		resize(image, image, Size(400, 400));
-		imshow(a, image);
-		moveWindow(a, 400, 100);
+		imshow(img, image);
+		moveWindow(img, 400, 100);
 		int key = waitKey();
 		if (key == 0) {
 			remove(img);
 			printf("%s is removed\n", img);
+			imgNameList.erase(imgNameList.begin() + i);
+			i--;
 			Sleep(2);
 		}
 		if (key == 27) {
 			break;
 		}
-		destroyWindow(a);
+		if (key == 8) {
+			if (i > 0)
+				i -= 2;
+			else if (i == 0)
+				i -= 1;
+		}
+		destroyWindow(img);
 	}
 	destroyWindow(question);
 }

@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 #include <opencv2/opencv.hpp>
 #include <windows.h>
+#include <errno.h>
 
 using namespace cv;
 using namespace std;
 
-#define FOLDER "./data/crawled_images/annotated/" //이미지(.jpg)와 이미지정보(xml) 파일이 저장된 경로
-#define IMGNAMEPATH "./data/crawled_images/annotated/*.jpg" //이미지 이름을 저장하기 위해 필요한 path 정보
+#define TRFOLDER "./data/crawled_images/annotated/train/" //이미지(.jpg)와 이미지정보(xml) 파일이 저장된 경로
+#define TRIMGNAMEPATH "./data/crawled_images/annotated/train/*.jpg" //이미지 이름을 저장하기 위해 필요한 path 정보
 
 //imgPath 폴더에 존재하는 모든 이미지(.jpg) 파일 이름을 imgList에 저장
 void getFileList(const char* imgPath, vector<char*>& imgList) {
@@ -29,7 +30,7 @@ void getFileList(const char* imgPath, vector<char*>& imgList) {
 }
 
 //이미지(Mat)와 두 개의 포인트(p1, p2)를 토대로 이미지정보(.xml)파일과 이미지(.jpg) 파일 생성
-void writeXML(Mat& image,char * imgName,Point pt1, Point pt2) {
+void writeXML(const char* FOLDER, Mat& image,char * imgName,Point pt1, Point pt2) {
 	char img[256];
 	char dstImgName[256];
 	char xml[256] = ".xml";
@@ -79,10 +80,11 @@ void writeXML(Mat& image,char * imgName,Point pt1, Point pt2) {
 //srcXmlName 파일에서 정수를 원소로 가지는 특정 tag를 찾아서 원소를 정수로 반환함
 int readTag(const char *srcXmlName, const char * tag) {
 
+	printf("\n@@@%s@@@\n", srcXmlName);
 	FILE* fp;
 	fopen_s(&fp, srcXmlName, "rt");
 	if (fp == NULL) {
-		printf("%s 파일 open 실패", srcXmlName);
+		printf("%s 파일 open 실패 errno : %d", srcXmlName,errno);
 		exit(1);
 	}
 
@@ -120,7 +122,7 @@ int readTag(const char *srcXmlName, const char * tag) {
 }
 
 //src_xml 파일에서 태그 <ymin> , <xmin>, <xmax>, <ymax> 를 읽어서 두 개의 점 p1, p2에 저장함
-void readXML(char * srcImgName, Mat& image, Point & pt1, Point & pt2) {
+void readXML(const char* FOLDER, char * srcImgName, Mat& image, Point & pt1, Point & pt2) {
 	char img[256];
 	char dstImgName[256];
 	char xml[256] = ".xml";
@@ -147,11 +149,12 @@ void readXML(char * srcImgName, Mat& image, Point & pt1, Point & pt2) {
 }
 
 //이미지(.jpg)와 이미지정보(.xml)을 읽어서 원근 투시 변환하고 새로운 이미지와 이미지정보를 저장한다.
-void annotatedImageAugmentation(vector<char*>& imgList, int flag) {
+void annotatedImageAugmentation(const char* FOLDER, vector<char*>& imgList, int flag) {
 	Point pt1, pt2;
 	Mat image;
 	for (const auto & img_name : imgList) {
-		readXML(img_name, image, pt1, pt2);
+		
+		readXML(FOLDER, img_name, image, pt1, pt2);
 		Point2f inputQuad[4];
 		Point2f outputQuad[4];
 
@@ -172,18 +175,21 @@ void annotatedImageAugmentation(vector<char*>& imgList, int flag) {
 		outputQuad[2] = Point2f(right,bottom);	//오른쪽아래
 		outputQuad[3] = Point2f(left,bottom);	//왼쪽아래
 
-		rectangle(image, pt1, pt2, Scalar(0, 255, 0), 2);
-		imshow("원본", image);
+		Mat printimg;
+		image.copyTo(printimg);
+		rectangle(printimg, pt1, pt2, Scalar(0, 255, 0), 2);
+		imshow("원본", printimg);
 
 		warpPerspective(image,image,getPerspectiveTransform(inputQuad, outputQuad),image.size());
 
-		rectangle(image, outputQuad[0], outputQuad[2], Scalar(0, 0, 255), 2);
-		imshow("원근 투시 변환", image);
+		image.copyTo(printimg);
+		rectangle(printimg, outputQuad[0], outputQuad[2], Scalar(0, 0, 255), 2);
+		imshow("원근 투시 변환", printimg);
 
-		waitKey();
+		//waitKey();
 		char augImgName[256] = "augmented_";
 		sprintf_s(augImgName, "%s%s", augImgName, img_name);
-		writeXML(image, augImgName, outputQuad[0], outputQuad[2]);
+		writeXML(FOLDER, image, augImgName, outputQuad[0], outputQuad[2]);
 		
 	}
 }
@@ -191,10 +197,12 @@ void annotatedImageAugmentation(vector<char*>& imgList, int flag) {
 int main(void)
 {
 	//
-	vector<char*> imgList;
-	getFileList(IMGNAMEPATH, imgList);
+	vector<char*> trimgList;
+	vector<char*> teimgList;
+	getFileList(TRIMGNAMEPATH, trimgList);
+	reverse(trimgList.begin(), trimgList.end());
+	annotatedImageAugmentation(TRFOLDER, trimgList, 1);
 
-	annotatedImageAugmentation(imgList, 1);
 
 	return 0;
 }

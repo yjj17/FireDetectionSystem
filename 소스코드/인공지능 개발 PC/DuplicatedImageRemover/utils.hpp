@@ -1,4 +1,5 @@
 #define FOLDER "./data/crawled_images/"
+int removeN;
 
 //하나의 히스토그램(query_hist)을 모든 히스토그램들(DB_hists)과 비교하여 비교값을 DB_similaritys에 저장
 Mat calc_similarity(Mat queryHist, vector<Mat>& DB_hists)
@@ -41,6 +42,7 @@ void select_view(vector<char*>& imgNameList, double sinc, Mat DB_similaritys, Ve
 			if (key == 0) {
 				remove(fname);
 				printf("%s is removed\n", fname);
+				removeN++;
 				Sleep(2);
 			}
 			if (key == 27) {

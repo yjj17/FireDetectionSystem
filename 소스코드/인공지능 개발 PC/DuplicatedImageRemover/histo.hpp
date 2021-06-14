@@ -25,17 +25,21 @@ void calc_histo(const Mat& img, Mat& hist, Vec3i bins, Vec3f range, int _dims)
 vector<Mat> load_histo(vector<char*>& imgNameList, Vec3i bins, Vec3f ranges, int nImages, int flag)
 {
 	vector<Mat> DB_hists;
+	printf("load_histo");
 	for (int i = 0; i < nImages; i++)
 	{
 		String  fname = format("./data/crawled_images/%d/%s", flag, imgNameList[i]);
 		Mat hsv, hist, img = imread(fname, IMREAD_COLOR);
-		if (img.empty()) continue;
+		if (img.empty()) 
+			printf("empty")
+			continue;
 
 		cvtColor(img, hsv, COLOR_BGR2HSV);			// HSV 컬러 변환
 		calc_histo(hsv, hist, bins, ranges, 2);			// 2차원 히스토그램 계산
 		DB_hists.push_back(hist);
+		printf(".");
 	}
-	cout << format("%d 개의 파일을 로드 및 히스토그램 계산 완료", DB_hists.size()) << endl;
+	printf("%d 개의 파일을 로드 및 히스토그램 계산 완료\n", DB_hists.size());
 	return DB_hists;
 }
 

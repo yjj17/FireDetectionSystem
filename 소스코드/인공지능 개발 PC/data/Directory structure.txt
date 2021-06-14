@@ -1,0 +1,25 @@
+<data>
+	<video>
+		<CCTV> CCTV 영상들 </CCTV>
+	</video>
+
+	<crawled_images>
+		<0>일반 이미지</0>
+		<1>화재 이미지</1>
+		<2>연기 이미지</2>
+		<test>테스트용 이미지</test>
+		<annotated>
+			<test>
+				localization을 테스트할 이미지1 파일.jpg
+				이미지1의 정보를 담고 있는 파일.xml
+				...
+			</test>
+			<train>
+				localization을 학습시킬 이미지1 파일.jpg
+				이미지1의 정보를 담고 있는 파일.xml
+				...
+			</train>
+		</annotated>
+	</crawled_images>
+
+</data>

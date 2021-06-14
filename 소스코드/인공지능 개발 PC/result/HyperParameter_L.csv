@@ -1,0 +1,21 @@
+,key,train data len,validation data len,EPOCHS,learning_rate_schedule,batch size,loss_func,optimizer,comment,test_accuracy,train time
+0,1623230133,573,193,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=35.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터증강,0.565040648,862.95
+1,1623231785,285,98,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=35.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델,0.65040648,804.37
+2,1623232734,285,98,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=35.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 레이어추가,0.585365832,812.66
+3,1623248296,285,98,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=17.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델,0.10569106,463.62
+4,1623248680,285,98,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=17.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 배치정규화,0.495934963,158.03
+5,1623248977,285,98,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=17.8125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 배치정규화 + 레이어추가,0.292682916,147.91
+6,1623488291,138,46,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=8.625,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터변경,0.550000012,138.58
+7,1623489223,138,46,20,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=8.625,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터변경,0.5,266.9
+8,1623489445,138,46,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=8.625,decay_rate=0.5,staircase=True)",32,MSE,Adam,초기 모델 + 데이터변경,0.425000012,129.92
+9,1623489678,138,46,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=8.625,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터변경 + 레이어추가,0.349999994,131.28
+10,1623489999,138,46,20,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=8.625,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터변경 + 레이어추가,0.400000006,276.88
+11,1623490289,138,46,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=17.25,decay_rate=0.5,staircase=True)",16,MSE,RMSprop,초기 모델 + 데이터변경 + 레이어감소,0.449999988,156.69
+12,1623490839,276,92,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=34.5,decay_rate=0.5,staircase=True)",16,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.699999988,297.57
+13,1623493097,414,138,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=51.75,decay_rate=0.5,staircase=True)",16,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.725000024,446.85
+14,1623493970,549,186,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=68.625,decay_rate=0.5,staircase=True)",16,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.675000012,583.27
+15,1623494694,549,186,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=34.3125,decay_rate=0.5,staircase=True)",32,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.574999988,554.56
+16,1623495450,549,186,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=137.25,decay_rate=0.5,staircase=True)",8,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.75,629.64
+17,1623503727,549,186,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=137.25,decay_rate=0.5,staircase=True)",8,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.725000024,613.69
+18,1623505275,549,186,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=137.25,decay_rate=0.5,staircase=True)",8,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.75,648.89
+19,1623506623,414,138,10,"ExponentialDecay(initial_learning_rate=0.0001,decay_steps=103.5,decay_rate=0.5,staircase=True)",8,MSE,RMSprop,초기 모델 + 데이터변경 + 데이터증강,0.675000012,488.12
