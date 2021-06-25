@@ -1,0 +1,29 @@
+crawling data와 kaggle data classification 학습시 test 결과 차이 분석
+	1. 학습 시 사진 개수 228개로 맞춤(crawling data는 직접 분류작업을 해야 하기 때문에)
+	2. 동일한 test data 구성 kaggle data 20장 crawling data 20장 오탐가능성이 높은 data 10장
+	
+	결과
+		kaggle data로 학습한 경우
+			test:  38/50 76%
+			validation: val_loss: 0.1322 - val_accuracy: 0.7895
+		crawling data로 학습한 경우
+			test:  37/50 74%
+			validation:  val_loss: 0.0815 - val_accuracy: 0.9035
+
+크롤링한 데이터는 유사한 데이터가 많아서 validation 정확도는 높게 나오지만 테스트 결과는 낮게 나오는 것으로 보이고 kaggle 데이터는 유사한 데이터가 비교적 적어서 validation 정확도는 낮게 나오지만 테스트 결과는 조금 나은 것으로 보인다.
+
+crawling data augmentation 전/후 비교
+	전: 228개의 데이터
+		test:  37/50 74%
+		validation:  val_loss: 0.0815 - val_accuracy: 0.9035
+	후: 1368개의 데이터
+		test:  40/50 80%
+		validation:  val_loss: 0.0800 - val_accuracy: 0.8830
+원근 투시 변환으로 Annotation data augmentation 전/후 학습 시 test 결과 차이 분석 (test data는 동일함)
+		전 219
+			test IOU : 0.3
+		한 번 438
+			test IOU : 0.35
+		두 번 657
+			test IOU : 0.37
+		
